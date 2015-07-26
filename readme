@@ -1,0 +1,14 @@
+This program downloads images from URLs contained in a text file.
+
+It creates 2 directories:
+    - Output/ that contains the downloaded images
+    - Logs/:
+        . logOK the log file of operations that were performed without mistakes
+        . logKO the log file of errors encountered during the script
+        . imageOrigins that contains the associations between image names and their URLs
+
+To download images, launch the command "python getImages.py -input <inputFile>". The program handles files with same name that come from different URL by renaming the conflicting file.
+
+Moreover, if the download is interrupted for any reason and it is launched again later, the files already downloaded will not be downloaded again. For that purpose, the file "imageOrigins" keeps all the required information to support both the file renaming and the possibility to start again a download without losing progress.
+
+Finally, to remove a previously downloaded file, one must use the command "python getImages.py -remove <filePath>" that removes the file AND updates the "file origins" log.
