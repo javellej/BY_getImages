@@ -1,3 +1,5 @@
+#!/usr/bin/python
+
 # import libraries
 import os
 import sys
@@ -11,7 +13,7 @@ def removeFile( filePath):
         os.remove( filePath)
     except Exception:
         reportError( "file \"%s\" not found" % filePath)
-    # Step 2 : update history
+    # Step 2 : update image origins file
     removeFromHistory( fileNameWithoutPath( filePath))
 
 # download a single file at a specific URL
@@ -24,7 +26,7 @@ def getFile( srcUrl, dstPath):
                 i += 1
             urllib.urlretrieve( srcUrl, dstPath)
             addLog( "Logs/logOK", "\"%s\" downloaded" % srcUrl)
-            addLog( "Logs/history", "%s %s" % ( fileNameWithoutPath( dstPath), srcUrl))
+            addLog( "Logs/imageOrigins", "%s %s" % ( fileNameWithoutPath( dstPath), srcUrl))
     except Exception:
         reportError( "problem while downloading \"%s\"" % srcUrl)
 
@@ -32,15 +34,15 @@ def downloadImages( fileName):
     #   get images
     urlImages = ""
     try:
-        print "BEGIN downloading files"
         urlImages = readFromFile( fileName)
-        print "END downloading files"
     except:
         reportError( "file \"%s\" was not found" % fileName)
     #   create output directory and log files
+    print "BEGIN downloading files"
     for url in urlImages:
         url = url[:-1]
         getFile( url, "Output/" + str( fileNameWithoutPath( url)))
+    print "END downloading files"
 
 # main program
 #   get arguments
@@ -51,7 +53,7 @@ if not os.path.exists( "Logs"):
     os.makedirs( "Logs")
 open( "Logs/logOK", 'a').close()
 open( "Logs/logKO", 'a').close()
-open( "Logs/history", 'a').close()
+open( "Logs/imageOrigins", 'a').close()
 if ( len( args) == 3 ):
     if ( (args[1] == "-input") or (args[1] == "-i") ):
         downloadImages( args[2])
@@ -61,6 +63,9 @@ if ( len( args) == 3 ):
         reportError( "invalid argument")
         printUsage()
         quit()
+if ( (len( args)==2) and ((args[1]=="-help") or (args[1]=="-h")) ):
+    printUsage()
+    quit()
 else:
     reportError( "invalid command")
     printUsage()

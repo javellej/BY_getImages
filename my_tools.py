@@ -27,9 +27,9 @@ def addLog( logFile, message):
     f.write( str( message) + "\n")
     f.close()
 
-# parse history log and get original URL associated with file
+# parse image origins log and get original URL associated with file
 def urlExists( url):
-    associations = readFromFile( "Logs/history")
+    associations = readFromFile( "Logs/imageOrigins")
     for pair in associations:
         line = pair.split( " ")
         line[0] = line[0][:-1]
@@ -46,9 +46,9 @@ def rename( filePath, i):
     return filePath[:pos1] + "_%s"%i + filePath[pos2:]
 
 def removeFromHistory( fileName):
-    associations = readFromFile( "Logs/history")
+    associations = readFromFile( "Logs/imageOrigins")
     # open log file back in write mode
-    f = open( "Logs/history", 'w')
+    f = open( "Logs/imageOrigins", 'w')
     for pair in associations:
         line = pair.split( " ")
         if ( line[0] != fileName ):
