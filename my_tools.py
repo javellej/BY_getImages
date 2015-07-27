@@ -32,12 +32,11 @@ def urlExists( url):
     associations = readFromFile( "Logs/imageOrigins")
     for pair in associations:
         line = pair.split( " ")
-        line[0] = line[0][:-1]
-        line[1] = line[1][:-1]
-        if ( line[1] == url ):
+        if ( line[1][:-1] == url ):
             return True
     return False
 
+# rename file by adding or updating counter in file name
 def rename( filePath, i):
     pos1 = filePath.rfind( "_")
     pos2 = filePath.rfind( ".")
