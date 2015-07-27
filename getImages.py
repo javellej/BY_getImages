@@ -37,7 +37,6 @@ def downloadImages( fileName):
         urlImages = readFromFile( fileName)
     except:
         reportError( "file \"%s\" was not found" % fileName)
-    #   create output directory and log files
     print "BEGIN downloading files"
     for url in urlImages:
         url = url[:-1]
@@ -45,8 +44,7 @@ def downloadImages( fileName):
     print "END downloading files"
 
 # main program
-#   get arguments
-args = sys.argv
+#   create output directory and log files
 if not os.path.exists( "Output"):
     os.makedirs( "Output")
 if not os.path.exists( "Logs"):
@@ -54,6 +52,8 @@ if not os.path.exists( "Logs"):
 open( "Logs/logOK", 'a').close()
 open( "Logs/logKO", 'a').close()
 open( "Logs/imageOrigins", 'a').close()
+#   get arguments
+args = sys.argv
 if ( len( args) == 3 ):
     if ( (args[1] == "-input") or (args[1] == "-i") ):
         downloadImages( args[2])
