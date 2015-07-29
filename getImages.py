@@ -5,7 +5,7 @@ import os
 import sys
 import urllib
 # import my_tools
-from my_tools import reportError, printUsage, readFromFile, fileNameWithoutPath, addLog, urlExists, rename, removeFromHistory
+from tools import reportError, printUsage, readFromFile, fileNameWithoutPath, addLog, urlExists, rename, removeFromHistory
 
 def removeFile( filePath):
     # Step 1 : remove file
