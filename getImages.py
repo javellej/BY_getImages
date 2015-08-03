@@ -2,6 +2,7 @@
 
 # import libraries
 import os
+import shutil
 import sys
 import urllib
 # import my_tools
@@ -63,9 +64,19 @@ if ( len( args) == 3 ):
         reportError( "invalid argument")
         printUsage()
         quit()
-if ( (len( args)==2) and ((args[1]=="-help") or (args[1]=="-h")) ):
-    printUsage()
-    quit()
+elif ( len( args)==2 ):
+    if ( (args[1]=="-help") or (args[1]=="-h") ):
+        printUsage()
+        quit()
+    if ( (args[1]=="-clearAll") ):
+        # ask for confirmation
+        print "This will delete all previously downloaded data, proceed anyways? [y/N]"
+        if ( raw_input().lower() in ["y", "Y", "yes", "Yes"] ):
+            shutil.rmtree( "Logs/")
+            shutil.rmtree( "Output/")
+            print "All data has been cleared"
+        else:
+            print "Cancel clear"
 else:
     reportError( "invalid command")
     printUsage()
