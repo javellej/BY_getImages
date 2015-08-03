@@ -5,8 +5,9 @@ def reportError( errorMessage):
     addLog( "Logs/logKO", errorMessage)
 
 def printUsage( ):
-    print "Usage: \"python getImages.py <-input|-i> <urlFileName>\" to download images"
-    print "       \"python getImages.py <-remove|-rm> <filePath>\" to remove a downloaded file"
+    print "Usage: \"./getImages.py <-input|-i> <urlFileName>\" to download images"
+    print "       \"./getImages.py <-remove|-rm> <filePath>\" to remove a downloaded file"
+    print "       \"./getImages.py -clearAll\" to remove all the directories and downloaded files"
 
 # read file contents
 # return list of the line contents of the the input file
